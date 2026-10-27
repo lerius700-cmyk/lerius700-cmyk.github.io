@@ -579,6 +579,13 @@
     padding: 0.3rem 0.8rem;
   }
 
+  /* ---------- Utilidades ---------- */
+
+  .sin-margen { margin-top: 0; }
+  .separado { margin-top: 1.1rem; }
+  .figura { margin: 0.5rem 0 0.8rem; }
+  .figura-fina { margin: 0.5rem 0 1rem; }
+
   /* ---------- Responsive ---------- */
 
   @media (max-width: 700px) {
@@ -704,7 +711,7 @@
 
     <div class="sub">
       <h4>Tecnologías utilizadas</h4>
-      <div class="rol-chips" style="margin-top:0;">
+      <div class="rol-chips sin-margen" >
         <span class="tag">Python</span>
         <span class="tag">Streamlit</span>
         <span class="tag">Plotly</span>
@@ -731,12 +738,12 @@
         <p>Las dos visualizaciones de la app, generadas con el dataset público del repositorio: distribución del odómetro y dispersión de odómetro contra precio. De los 51.525 anuncios, 43.633 tienen odómetro registrado: esos son los que se pueden graficar.</p>
       </div>
 
-      <figure style="margin:0.5rem 0 0.8rem;">
+      <figure  class="figura">
         <img class="captura" src="dashboard-odometro.png" width="1200" height="660" alt="Histograma de la distribución del odómetro de los 43.633 vehículos con odómetro registrado." loading="lazy">
         <figcaption class="pie-captura">Distribución del odómetro &middot; 43.633 vehículos con odómetro registrado, de 51.525 anuncios.</figcaption>
       </figure>
 
-      <figure style="margin:0.5rem 0 1rem;">
+      <figure  class="figura figura-fina">
         <img class="captura" src="dashboard-precio.png" width="1200" height="660" alt="Gráfico de dispersión del odómetro contra el precio de 43.633 vehículos: el precio medio es de 12.132 USD y cae a medida que sube el kilometraje." loading="lazy">
         <figcaption class="pie-captura">Odómetro contra precio &middot; el precio va de 1 a 375.000 USD, con media de 12.132 USD.</figcaption>
       </figure>
@@ -775,7 +782,7 @@
 
     <div class="sub">
       <h4>Tecnologías utilizadas</h4>
-      <div class="rol-chips" style="margin-top:0;">
+      <div class="rol-chips sin-margen" >
         <span class="tag">Python</span>
         <span class="tag">pygame</span>
         <span class="tag">pytest</span>
@@ -792,7 +799,7 @@
         <p>Captura del juego en marcha: la nave del jugador en el centro, las formaciones de enemigos y el HUD con las vidas y el puntaje.</p>
       </div>
 
-      <figure style="margin:0.5rem 0 1rem;">
+      <figure  class="figura figura-fina">
         <img class="captura" src="void-hunter-gameplay.png" width="654" height="982" alt="Captura de Void-Hunter en marcha: la nave del jugador en el centro de la pantalla, formaciones de enemigos, asteroides y el HUD con las vidas y el puntaje." loading="lazy">
         <figcaption class="pie-captura">Void-Hunter en marcha &middot; Act 1, oleada 1 de 6, patrón de enemigos "Butterfly" y el HUD con vidas y puntaje.</figcaption>
       </figure>
@@ -836,7 +843,7 @@
 
     <div class="sub">
       <h4>Tecnologías utilizadas</h4>
-      <div class="rol-chips" style="margin-top:0;">
+      <div class="rol-chips sin-margen" >
         <span class="tag">Python</span>
         <span class="tag">pygame</span>
         <span class="tag">pytest</span>
@@ -853,7 +860,7 @@
         <p>Imagen de la escenografía y los diseños dentro del juego.</p>
       </div>
 
-      <figure style="margin:0.5rem 0 1rem;">
+      <figure  class="figura figura-fina">
         <img class="captura-juego" src="https://raw.githubusercontent.com/lerius700-cmyk/Stellar-Horizon/main/sprite_tests/capture_boss.png" width="480" height="270" alt="Captura de Stellar-Horizon: el jugador enfrentándose al jefe, con enemigos y HUD." loading="lazy">
         <figcaption class="pie-captura">Stellar-Horizon &middot; 480&times;270 internos, escalados 4&times; a 1920&times;1080.</figcaption>
       </figure>
@@ -877,7 +884,7 @@
 
     <p class="lead">Si estás leyendo esto y hay una vacante de datos que encaja, escríbeme. Respondo en el día.</p>
 
-    <div class="contact-grid" style="margin-top:1.1rem;">
+    <div class="contact-grid separado" >
       <div class="contact-card">
         <div class="label">Correo</div>
         <a href="mailto:lerius700@gmail.com">lerius700@gmail.com</a>
@@ -899,7 +906,7 @@
       </div>
     </div>
 
-    <p class="pie-captura" style="margin-top:1.1rem;">Bogotá D.C., Colombia &middot; Disponible para remoto en LATAM &middot; Mi otra cara profesional es la música: producción, mezcla y mastering desde 2017.</p>
+    <p class="pie-captura separado" >Bogotá D.C., Colombia &middot; Disponible para remoto en LATAM &middot; Mi otra cara profesional es la música: producción, mezcla y mastering desde 2017.</p>
   </section>
 
 </main>
@@ -915,7 +922,7 @@
   <a class="btn" href="https://www.linkedin.com/in/miguel-angel-vera-fajardo-0345ab389/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" integrity="sha384-RRHfJ6w1mTlKUBMYT/hvnRiOzEB/vyRV3DrQOseb6oYfvaZSfdd0byS4bHps0k2R" crossorigin="anonymous" defer></script></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" integrity="sha384-RRHfJ6w1mTlKUBMYT/hvnRiOzEB/vyRV3DrQOseb6oYfvaZSfdd0byS4bHps0k2R" crossorigin="anonymous" defer></script>
 <script src="vehiculos-nube.js" defer></script>
 <script>
   /* =====================================================================
