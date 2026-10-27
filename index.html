@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050805">
+<meta name="color-scheme" content="dark">
+<title>Portafolio · Miguel Angel Vera Fajardo · Científico de datos</title>
+<meta name="description" content="Portafolio de evidencias de Miguel Angel Vera Fajardo: Scientist de datos en formación, con background en producción musical. Tres proyectos con lo que hice, con qué herramientas trabajé y qué aprendí.">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --fondo: #050805;
+    --fondo-2: #071107;
+    --panel: rgba(0, 255, 65, 0.035);
+    --panel-2: rgba(0, 255, 65, 0.07);
+    --linea: rgba(0, 255, 65, 0.16);
+    --linea-fuerte: rgba(0, 255, 65, 0.45);
+    --verde: #00ff41;
+    --verde-claro: #d8ffe3;
+    --verde-tenue: #74a883;
+    --verde-muy-tenue: #3f5f49;
+    --ambar: #ffb454;
+    --fuente: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, "Liberation Mono", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--fuente);
+    background: var(--fondo);
+    color: var(--verde-claro);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Fondo: lluvia Matrix ---------- */
+
+  #lluvia {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+  }
+
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.22) 3px
+    );
+    opacity: 0.35;
+  }
+
+  header, nav, main, footer, .barra-movil { position: relative; z-index: 2; }
+
+  /* ---------- Encabezado ---------- */
+
+  header {
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(0, 255, 65, 0.10) 0%, rgba(5, 8, 5, 0) 70%),
+      linear-gradient(180deg, rgba(0, 255, 65, 0.05) 0%, rgba(5, 8, 5, 0) 100%);
+    border-bottom: 1px solid var(--linea);
+    padding: 2.4rem 1.25rem 2rem;
+    text-align: center;
+  }
+
+  header h1 {
+    font-family: var(--mono);
+    font-size: clamp(1.45rem, 4.6vw, 2.7rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--verde);
+    text-shadow: 0 0 18px rgba(0, 255, 65, 0.45);
+    margin-bottom: 0.5rem;
+  }
+
+  p.eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--verde-tenue);
+    margin-bottom: 0.7rem;
+  }
+
+  p.subtitle {
+    font-size: 1rem;
+    color: var(--verde-claro);
+    max-width: 46rem;
+    margin: 0.5rem auto 0;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 1.2rem 0 0;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.22rem 0.62rem;
+    border-radius: 3px;
+    background: rgba(0, 255, 65, 0.08);
+    color: var(--verde);
+    border: 1px solid var(--linea);
+  }
+
+  .tag.alt {
+    background: transparent;
+    color: var(--verde-tenue);
+    border-style: dashed;
+  }
+
+  .header-contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem 1.1rem;
+    margin-top: 1.2rem;
+    font-family: var(--mono);
+    font-size: 0.84rem;
+  }
+
+  .header-contact a {
+    color: var(--verde-claro);
+    text-decoration: none;
+    border-bottom: 1px solid var(--linea-fuerte);
+    padding-bottom: 1px;
+  }
+
+  .header-contact a:hover { color: var(--verde); }
+
+  /* ---------- Banda 3D con datos reales ---------- */
+
+  .nube {
+    position: relative;
+    height: 380px;
+    border-bottom: 1px solid var(--linea);
+    background:
+      radial-gradient(80% 120% at 50% 100%, rgba(0, 255, 65, 0.10) 0%, rgba(5, 8, 5, 0) 70%),
+      var(--fondo);
+    overflow: hidden;
+  }
+
+  .nube canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .nube .rotulo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--verde-tenue);
+    pointer-events: none;
+  }
+
+  .nube .rotulo strong { color: var(--verde); font-weight: 600; }
+
+  .nube .pie-nube {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.85rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: var(--verde-tenue);
+    background: linear-gradient(to top, rgba(5, 8, 5, 0.99) 62%, rgba(5, 8, 5, 0) 100%);
+    pointer-events: none;
+  }
+
+  .nube .pie-nube b { color: var(--verde); font-weight: 600; }
+
+  .nube-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--verde-muy-tenue);
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+
+  /* ---------- Navegacion ---------- */
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(5, 8, 5, 0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--linea);
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.45rem 0.8rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar { display: none; }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--verde-tenue);
+    text-decoration: none;
+    padding: 0.35rem 0.7rem;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  nav a:hover { color: var(--verde-claro); background: var(--panel-2); }
+  nav a.activo { color: var(--fondo); background: var(--verde); }
+
+  /* ---------- Layout ---------- */
+
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  section {
+    scroll-margin-top: 3.6rem;
+    margin-bottom: 2rem;
+    background: var(--panel);
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+    padding: 1.6rem 1.4rem;
+    position: relative;
+  }
+
+  section::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 34px;
+    height: 2px;
+    background: var(--verde);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
+  }
+
+  section h2 {
+    font-family: var(--mono);
+    color: var(--verde);
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.9rem;
+    border-bottom: 1px solid var(--linea);
+    padding-bottom: 0.5rem;
+  }
+
+  .bloque-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--verde-muy-tenue);
+    margin-bottom: 0.3rem;
+  }
+
+  h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
+
+  .meta {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--verde-tenue);
+    margin-bottom: 1.1rem;
+  }
+
+  .meta a { color: var(--verde); }
+
+  p { margin-bottom: 0.9rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead { color: var(--verde-claro); }
+
+  /* ---------- Chips de rol ---------- */
+
+  .rol-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.1rem;
+  }
+
+  /* ---------- Rejilla de las 4 preguntas ---------- */
+
+  .qa {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .qa-card {
+    background: var(--panel-2);
+    border: 1px solid var(--linea);
+    border-left: 2px solid var(--verde);
+    border-radius: 3px;
+    padding: 0.85rem 0.95rem;
+  }
+
+  .qa-card:nth-child(3) { border-left-color: var(--verde-tenue); }
+  .qa-card:nth-child(4) { border-left-color: var(--verde-muy-tenue); }
+
+  .qa-card h4 {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--verde);
+    margin-bottom: 0.35rem;
+  }
+
+  .qa-card:nth-child(3) h4 { color: var(--verde-tenue); }
+  .qa-card:nth-child(4) h4 { color: var(--verde-muy-tenue); }
+
+  .qa-card p { font-size: 0.9rem; margin: 0; }
+
+  /* ---------- Sub-bloques ---------- */
+
+  .sub {
+    margin-top: 1.3rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--linea);
+  }
+
+  .sub h4 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--verde-tenue);
+    margin-bottom: 0.6rem;
+  }
+
+  /* ---------- Evidencias ---------- */
+
+  .evidencia {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.07);
+  }
+
+  .evidencia:last-child { border-bottom: none; }
+
+  .evidencia .marca {
+    flex: 0 0 auto;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 2px;
+    background: rgba(0, 255, 65, 0.14);
+    color: var(--verde);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.15rem;
+  }
+
+  .evidencia .marca.espera {
+    background: rgba(255, 180, 84, 0.14);
+    color: var(--ambar);
+  }
+
+  .evidencia p { font-size: 0.9rem; margin: 0; }
+  .evidencia p a { color: var(--verde); }
+
+  .captura {
+    width: 100%;
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+    display: block;
+    background: #000;
+  }
+
+  .captura-juego {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+    background: #000;
+    image-rendering: pixelated;
+  }
+
+  .pie-captura {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--verde-tenue);
+    margin-top: 0.5rem;
+  }
+
+  /* ---------- Pipeline del analisis ---------- */
+
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+  }
+
+  .paso {
+    background: var(--panel-2);
+    border: 1px solid var(--linea);
+    border-radius: 3px;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .paso .n {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--verde-muy-tenue);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .paso strong { font-size: 0.9rem; display: block; }
+  .paso small { color: var(--verde-tenue); font-size: 0.78rem; }
+
+  /* ---------- Botones ---------- */
+
+  .botones { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+
+  .btn {
+    display: inline-block;
+    padding: 0.55rem 1.1rem;
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--verde);
+    color: var(--verde);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .btn:hover { background: rgba(0, 255, 65, 0.12); box-shadow: 0 0 12px rgba(0, 255, 65, 0.25); }
+
+  .btn.primary {
+    background: var(--verde);
+    border: 1px solid var(--verde);
+    color: var(--fondo);
+  }
+
+  .btn.primary:hover { filter: brightness(1.12); color: var(--fondo); }
+
+  /* ---------- Contacto ---------- */
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .contact-card {
+    background: var(--panel-2);
+    border: 1px solid var(--linea);
+    border-radius: 3px;
+    padding: 1rem 1.1rem;
+  }
+
+  .contact-card .label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--verde-muy-tenue);
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-card a {
+    font-family: var(--mono);
+    color: var(--verde-claro);
+    font-weight: 600;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .contact-card a:hover { color: var(--verde); }
+
+  /* ---------- Barra fija en movil ---------- */
+
+  .barra-movil {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    gap: 0.5rem;
+    padding: 0.6rem 0.8rem;
+    background: rgba(5, 8, 5, 0.97);
+    border-top: 1px solid var(--linea-fuerte);
+  }
+
+  .barra-movil .btn { flex: 1; text-align: center; }
+
+  /* ---------- Pie ---------- */
+
+  footer {
+    border-top: 1px solid var(--linea);
+    padding: 1.4rem 1.25rem 2.2rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--verde-tenue);
+  }
+
+  footer .path {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--verde-muy-tenue);
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .version {
+    display: inline-block;
+    margin-top: 0.7rem;
+    font-size: 0.74rem;
+    color: var(--verde-tenue);
+    background: var(--panel-2);
+    border: 1px solid var(--linea);
+    border-radius: 3px;
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 700px) {
+    header { padding: 1.6rem 1rem 1.3rem; }
+    body { padding-bottom: 4.6rem; }
+    main { padding: 1.2rem 0.9rem 2rem; }
+    section { padding: 1.2rem 1rem; }
+    .nube { height: 330px; }
+    .nube .rotulo { font-size: 0.64rem; padding: 0.7rem 0.9rem; }
+    .nube .pie-nube { font-size: 0.64rem; padding: 0.7rem 0.9rem; }
+    .barra-movil { display: flex; }
+    nav { justify-content: flex-start; padding: 0.35rem 0.4rem; }
+    nav a { font-size: 0.72rem; padding: 0.3rem 0.5rem; }
+    .qa { grid-template-columns: 1fr; }
+    #lluvia { opacity: 0.3; }
+  }
+
+  /* ---------- Respeta a quien pidio menos movimiento ---------- */
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    #lluvia { opacity: 0.18; }
+    section::before { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="lluvia" aria-hidden="true"></canvas>
+<div class="scanlines" aria-hidden="true"></div>
+
+<header>
+  <p class="eyebrow">Portafolio de evidencias &middot; Sprint 9 CPC2</p>
+  <h1>Miguel Angel Vera Fajardo</h1>
+  <p class="subtitle">Científico de datos con background en producción musical. A diferencia del CV, que dice lo que sabes, el portafolio muestra lo que sabes hacer.</p>
+
+  <div class="tags">
+    <span class="tag">Científico de datos</span>
+    <span class="tag">Data Scientist</span>
+    <span class="tag">Python &middot; SQL</span>
+    <span class="tag">Bogotá D.C., Colombia</span>
+    <span class="tag alt">Remoto &middot; LATAM</span>
+    <span class="tag alt">Audio tech &middot; Gaming</span>
+  </div>
+
+  <div class="header-contact">
+    <a href="mailto:lerius700@gmail.com">lerius700@gmail.com</a>
+    <a href="https://www.linkedin.com/in/miguel-angel-vera-fajardo-0345ab389/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/lerius700-cmyk?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</header>
+
+<div class="nube">
+  <div class="rotulo">
+    <span><strong>12.000</strong> de 43.633 vehículos usados en 3D</span>
+    <span>arrastra para girar &middot; precio &times; od&oacute;metro &times; d&iacute;as publicado</span>
+  </div>
+  <canvas id="nube3d" aria-label="Nube de puntos en 3D con 12.000 vehículos usados: kilometraje, precio y días publicado"></canvas>
+  <p class="pie-nube">
+    Tus datos reales, no una decoraci&oacute;n: cada punto es un anuncio del dataset p&uacute;blico de
+    <b>Sprint7-Vehicles-Dashboard</b> (51.525 filas). Eje X: kilometraje &middot; Eje Y: precio en USD
+    (de 1 a 375.000) &middot; Eje Z: d&iacute;as publicado. Kilometraje y precio van en
+    <b>escala logar&iacute;tmica</b>: la distribuci&oacute;n est&aacute; tan concentrada que en escala lineal la nube
+    queda aplastada. El brillo crece con los d&iacute;as sin venderse.
+  </p>
+</div>
+
+<nav>
+  <a href="#sobre-mi">Sobre mí</a>
+  <a href="#proyecto-1">Proyecto 1</a>
+  <a href="#proyecto-2">Proyecto 2</a>
+  <a href="#proyecto-3">Proyecto 3</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<main>
+
+  <!-- BLOQUE 1 -->
+  <section id="sobre-mi">
+    <p class="bloque-label">Bloque 1 de 5</p>
+    <h2>SOBRE MI</h2>
+
+    <p>Científico de datos con nueve años de experiencia componiendo y produciendo música: leer formas de onda con Ableton Live es, en el fondo, leer un histograma. Hoy aplico eso en Python y SQL sobre datos de producto, desde la definición del problema hasta la comunicación del hallazgo.</p>
+
+    <p>Busco rol como científico de datos junior en Latinoamérica, en remoto, dentro de audio tech, gaming o music streaming. Son los tres sectores donde mi perfil es asimétrico y no compito de tú a tú con el analista promedio del mercado.</p>
+
+    <p>Mi ventaja es que <b>construyo</b>, no solo analizo. Los tres proyectos de esta página son la evidencia: un dashboard con datos reales ya desplegado, y dos juegos completos en Python con suites de pruebas y versiones descargables. Todos se pueden abrir y comprobar.</p>
+
+    <div class="rol-chips">
+      <span class="tag">Rol que busco: Científico de datos</span>
+      <span class="tag">Nivel: junior, en formación</span>
+      <span class="tag alt">LATAM, remoto</span>
+      <span class="tag alt">Audio tech</span>
+      <span class="tag alt">Gaming</span>
+      <span class="tag alt">Music streaming</span>
+    </div>
+  </section>
+
+  <!-- BLOQUE 2 -->
+  <section id="proyecto-1">
+    <p class="bloque-label">Bloque 2 de 5 &middot; Proyecto 1 &middot; Datos</p>
+    <h2>DASHBOARD SOBRE ANÁLISIS DE PRECIOS DE VEHÍCULOS</h2>
+    <p class="meta">Streamlit + Plotly sobre 51.525 registros &middot; desplegado en un servidor público</p>
+
+    <div class="qa">
+      <div class="qa-card">
+        <h4>Objetivo</h4>
+        <p><b>Hacer</b> consultable el precio de los vehículos usados. Con 51.525 anuncios, la pregunta "cuánto vale uno" no se responde con un promedio, sino con la relación entre precio, odómetro y modelo.</p>
+      </div>
+      <div class="qa-card">
+        <h4>El problema</h4>
+        <p>El precio va de 1 a 375.000 USD y el odómetro de 0 a 990.000 km. En una tabla ese rango se lee como ruido: hacía falta una vista donde la relación entre las variables se viera de golpe.</p>
+      </div>
+      <div class="qa-card">
+        <h4>Qué hice</h4>
+        <p><b>Construí</b> la aplicación en Streamlit con Plotly sobre los 51.525 anuncios de vehículos del dataset (precio, odómetro, modelo, año, condición, combustible, transmisión, tipo, color, 4x4 y fecha de publicación): el histograma del odómetro y la dispersión de odómetro contra precio, y publiqué el despliegue en un servidor público.</p>
+      </div>
+      <div class="qa-card">
+        <h4>Resultado y aprendizaje</h4>
+        <p>La aplicación está desplegada y se abre sin instalar nada, y sus dos visualizaciones están aquí, generadas con el mismo dataset que consume la app: no dependes de que el servidor esté despierto para ver el análisis. <b>El hallazgo:</b> el precio medio de los 43.633 vehículos con odómetro registrado es de 12.132 USD y cae de forma sostenida a medida que sube el kilometraje, que es exactamente la relación que no se ve en una tabla. <b>El aprendizaje:</b> un dashboard local no demuestra nada; uno con URL pública demuestra que lo sabes entregar.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h4>Tecnologías utilizadas</h4>
+      <div class="rol-chips" style="margin-top:0;">
+        <span class="tag">Python</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">Plotly</span>
+        <span class="tag">pandas</span>
+        <span class="tag alt">Render</span>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h4>Evidencias</h4>
+
+      <div class="evidencia">
+        <span class="marca">1</span>
+        <p><a href="https://vehicles-dashboard-vtbj.onrender.com/" target="_blank" rel="noopener noreferrer">Demo en vivo</a>: se abre sin instalar nada. El servidor es de capa gratuita, así que la primera carga después de un rato de inactividad tarda unos segundos.</p>
+      </div>
+
+      <div class="evidencia">
+        <span class="marca">2</span>
+        <p><a href="https://github.com/lerius700-cmyk/Sprint7-Vehicles-Dashboard" target="_blank" rel="noopener noreferrer">Repositorio con el código y el dataset</a>: el CSV con las 51.525 filas está dentro, para que cualquiera pueda reproducir las dos visualizaciones.</p>
+      </div>
+
+      <div class="evidencia">
+        <span class="marca">3</span>
+        <p>Las dos visualizaciones de la app, generadas con el dataset público del repositorio: distribución del odómetro y dispersión de odómetro contra precio. De los 51.525 anuncios, 43.633 tienen odómetro registrado: esos son los que se pueden graficar.</p>
+      </div>
+
+      <figure style="margin:0.5rem 0 0.8rem;">
+        <img class="captura" src="dashboard-odometro.png" width="1200" height="660" alt="Histograma de la distribución del odómetro de los 43.633 vehículos con odómetro registrado." loading="lazy">
+        <figcaption class="pie-captura">Distribución del odómetro &middot; 43.633 vehículos con odómetro registrado, de 51.525 anuncios.</figcaption>
+      </figure>
+
+      <figure style="margin:0.5rem 0 1rem;">
+        <img class="captura" src="dashboard-precio.png" width="1200" height="660" alt="Gráfico de dispersión del odómetro contra el precio de 43.633 vehículos: el precio medio es de 12.132 USD y cae a medida que sube el kilometraje." loading="lazy">
+        <figcaption class="pie-captura">Odómetro contra precio &middot; el precio va de 1 a 375.000 USD, con media de 12.132 USD.</figcaption>
+      </figure>
+
+      <div class="evidencia">
+        <span class="marca espera">4</span>
+        <p>La siguiente versión le agrega filtros por marca, condición y precio, y una tabla con los resultados filtrados.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 3 -->
+  <section id="proyecto-2">
+    <p class="bloque-label">Bloque 3 de 5 &middot; Proyecto 2 &middot; Juego</p>
+    <h2>Void-Hunter</h2>
+    <p class="meta">Shooter vertical de pixel art en Python y pygame &middot; v1.7.2 &middot; 443 commits &middot; release descargable para Windows</p>
+
+    <div class="qa">
+      <div class="qa-card">
+        <h4>Objetivo</h4>
+        <p>Explorar mis conocimientos en Python y pygame para crear videojuegos en los cuales poder albergar mi música para difusión y satisfacción propia.<br>Código mantenible, cada cambio verificado con pruebas y una versión nueva que alguien pueda descargar y jugar sin instalar Python.</p>
+      </div>
+      <div class="qa-card">
+        <h4>El problema</h4>
+        <p>La mayoría de proyectos personales de juego se quedan en "funciona acá". El reto era la entrega: que el código fuera verificable, que el ejecutable se pudiera regenerar y que la versión publicada fuera exactamente la que está en el repositorio.</p>
+      </div>
+      <div class="qa-card">
+        <h4>Qué hice</h4>
+        <p>Desarrollé Void-Hunter, un shooter vertical de pixel art: 9 escenas, 18 oleadas en actos de 6 y 4 jefes con máquina de estados, modo roguelike con semillas reproducibles y efectos de sonido sintetizados por el propio proyecto. Toda la música fue compuesta, escrita y diseñada por mí. También construí la suite de pruebas automatizadas, que hoy ocupa 102 módulos de test, y automatizé la construcción de los ejecutables de Windows para publicar cada bloque funcional como release.</p>
+      </div>
+      <div class="qa-card">
+        <h4>Resultado y aprendizaje</h4>
+        <p>La versión publicada hoy es la v1.7.2, con 443 commits acumulados y el ejecutable de Windows disponible para descargar. Cada release cierra con su propia tabla de verificación. El aprendizaje más caro: el bug que más me costó no era el que reventaba, sino el que calculaba el valor correcto y nunca lo dibujaba — la franja de fondo se animaba en cada frame y se descartaba al renderizar. Afinar el dibujado, no el cálculo, fue lo que lo arregló.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h4>Tecnologías utilizadas</h4>
+      <div class="rol-chips" style="margin-top:0;">
+        <span class="tag">Python</span>
+        <span class="tag">pygame</span>
+        <span class="tag">pytest</span>
+        <span class="tag">PyInstaller</span>
+        <span class="tag alt">Git &middot; GitHub Releases</span>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h4>Evidencias</h4>
+
+      <div class="evidencia">
+        <span class="marca">1</span>
+        <p>Captura del juego en marcha: la nave del jugador en el centro, las formaciones de enemigos y el HUD con las vidas y el puntaje.</p>
+      </div>
+
+      <figure style="margin:0.5rem 0 1rem;">
+        <img class="captura" src="void-hunter-gameplay.png" width="654" height="982" alt="Captura de Void-Hunter en marcha: la nave del jugador en el centro de la pantalla, formaciones de enemigos, asteroides y el HUD con las vidas y el puntaje." loading="lazy">
+        <figcaption class="pie-captura">Void-Hunter en marcha &middot; Act 1, oleada 1 de 6, patrón de enemigos "Butterfly" y el HUD con vidas y puntaje.</figcaption>
+      </figure>
+
+      <div class="evidencia">
+        <span class="marca">2</span>
+        <p><a href="https://github.com/lerius700-cmyk/Void-Hunter" target="_blank" rel="noopener noreferrer">Repositorio</a>: el código, la suite de pruebas y las notas de cada release.</p>
+      </div>
+
+      <div class="evidencia">
+        <span class="marca">3</span>
+        <p><a href="https://github.com/lerius700-cmyk/Void-Hunter/releases/tag/v1.7.2" target="_blank" rel="noopener noreferrer">Release v1.7.2</a>, del 25 de octubre de 2026: el zip de Windows para descargar y jugar, con su tabla de verificación.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 4 -->
+  <section id="proyecto-3">
+    <p class="bloque-label">Bloque 4 de 5 &middot; Proyecto 3 &middot; Juego</p>
+    <h2>Stellar-Horizon</h2>
+    <p class="meta">Shooter horizontal de pixel art de 16 bits &middot; v1.7.2 &middot; 109 commits &middot; 514 pruebas en verde</p>
+
+    <div class="qa">
+      <div class="qa-card">
+        <h4>Objetivo</h4>
+        <p>Construir un segundo juego con arquitectura propia, sin arrastrar las decisiones del primero. Esta vez me concentré muchísimo más en que se viera animado, y en que al menos cada cosa tuviera animación o movimiento (de así fueran 2 frames).</p>
+      </div>
+      <div class="qa-card">
+        <h4>El problema</h4>
+        <p>Void-Hunter ya tenía su arquitectura y su estilo. La pregunta era si podía hacer un juego horizontal, con un jefe final el cual tuviera nuevas mecánicas. Quería seguir desarrollando música, pero sin que se pareciera a Void-Hunter.</p>
+      </div>
+      <div class="qa-card">
+        <h4>Qué hice</h4>
+        <p>Desarrollé Stellar-Horizon, un shooter horizontal de pixel art de 16 bits: resolución interna de 480×270 escalada 4 veces a 1920×1080, un acto con 6 oleadas y un jefe final con máquina de estados de 5 acciones, anillos de mejora al estilo Star Fox 64 y banda sonora MIDI. Lo construí sobre un motor propio, con su sistema de colisiones, sus sprites y su suite de pruebas.</p>
+      </div>
+      <div class="qa-card">
+        <h4>Resultado y aprendizaje</h4>
+        <p>La versión publicada es la v1.7.2, con 109 commits, 514 pruebas automáticas en verde y el ejecutable de Windows en la release. El aprendizaje: decidir la resolución interna (480×270) y escalar en el render fue lo que hizo posible sostener 120 FPS en equipos modestos. La resolución es una decisión de arquitectura, no un ajuste gráfico.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h4>Tecnologías utilizadas</h4>
+      <div class="rol-chips" style="margin-top:0;">
+        <span class="tag">Python</span>
+        <span class="tag">pygame</span>
+        <span class="tag">pytest</span>
+        <span class="tag">PyInstaller</span>
+        <span class="tag alt">MIDI</span>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h4>Evidencias</h4>
+
+      <div class="evidencia">
+        <span class="marca">1</span>
+        <p>Imagen de la escenografía y los diseños dentro del juego.</p>
+      </div>
+
+      <figure style="margin:0.5rem 0 1rem;">
+        <img class="captura-juego" src="https://raw.githubusercontent.com/lerius700-cmyk/Stellar-Horizon/main/sprite_tests/capture_boss.png" width="480" height="270" alt="Captura de Stellar-Horizon: el jugador enfrentándose al jefe, con enemigos y HUD." loading="lazy">
+        <figcaption class="pie-captura">Stellar-Horizon &middot; 480&times;270 internos, escalados 4&times; a 1920&times;1080.</figcaption>
+      </figure>
+
+      <div class="evidencia">
+        <span class="marca">2</span>
+        <p><a href="https://github.com/lerius700-cmyk/Stellar-Horizon" target="_blank" rel="noopener noreferrer">Repositorio</a>: el motor, los sprites, la banda sonora y las pruebas.</p>
+      </div>
+
+      <div class="evidencia">
+        <span class="marca">3</span>
+        <p><a href="https://github.com/lerius700-cmyk/Stellar-Horizon/releases/tag/v1.7.2" target="_blank" rel="noopener noreferrer">Release v1.7.2</a>: el ejecutable de Windows para descargar y jugar, y el detalle de las 514 pruebas en verde.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 5 -->
+  <section id="contacto">
+    <p class="bloque-label">Bloque 5 de 5</p>
+    <h2>CONTACTO</h2>
+
+    <p class="lead">Si estás leyendo esto y hay una vacante de datos que encaja, escríbeme. Respondo en el día.</p>
+
+    <div class="contact-grid" style="margin-top:1.1rem;">
+      <div class="contact-card">
+        <div class="label">Correo</div>
+        <a href="mailto:lerius700@gmail.com">lerius700@gmail.com</a>
+        <div class="botones">
+          <button class="btn" type="button" id="copiar-email">Copiar correo</button>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="label">LinkedIn</div>
+        <a href="https://www.linkedin.com/in/miguel-angel-vera-fajardo-0345ab389/" target="_blank" rel="noopener noreferrer">linkedin.com/in/miguel-angel-vera-fajardo</a>
+      </div>
+      <div class="contact-card">
+        <div class="label">GitHub</div>
+        <a href="https://github.com/lerius700-cmyk?tab=repositories" target="_blank" rel="noopener noreferrer">github.com/lerius700-cmyk &middot; repositorios</a>
+      </div>
+      <div class="contact-card">
+        <div class="label">Perfil musical</div>
+        <a href="https://open.spotify.com/artist/0nqfYo03VormmBWC8TxxAn" target="_blank" rel="noopener noreferrer">Lerius en Spotify</a>
+      </div>
+    </div>
+
+    <p class="pie-captura" style="margin-top:1.1rem;">Bogotá D.C., Colombia &middot; Disponible para remoto en LATAM &middot; Mi otra cara profesional es la música: producción, mezcla y mastering desde 2017.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>Miguel Angel Vera Fajardo &middot; Científico de datos &middot; Portafolio de evidencias</p>
+  <span class="version">v1.0 &middot; 3 proyectos &middot; próxima versión: filtros y tabla en el dashboard</span>
+  <span class="path">https://lerius700-cmyk.github.io/</span>
+</footer>
+
+<div class="barra-movil">
+  <a class="btn primary" href="mailto:lerius700@gmail.com">Escribir</a>
+  <a class="btn" href="https://www.linkedin.com/in/miguel-angel-vera-fajardo-0345ab389/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/examples/js/controls/OrbitControls.js" defer></script>
+<script src="vehiculos-nube.js" defer></script>
+<script>
+  /* =====================================================================
+     Portafolio de Miguel Angel Vera Fajardo — capa interactiva
+     1. Lluvia Matrix de fondo (canvas 2D)
+     2. Nube 3D de datos reales (Three.js)
+     3. Copiar correo + navegacion activa
+     Todo degrada sin romper: si WebGL o el CDN fallan, el texto sigue igual.
+     ===================================================================== */
+
+  const REDUCIDO = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- 1. Lluvia Matrix ---------------- */
+
+  function iniciarLluvia() {
+    const cv = document.getElementById('lluvia');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    const glifos = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+-=><';
+    let columnas = [];
+    let fuente = 14;
+    let ultimo = 0;
+
+    const intervalo = 1000 / 30;
+
+    function dimensionar() {
+      cv.width = window.innerWidth;
+      cv.height = window.innerHeight;
+      ctx.font = fuente + 'px monospace';
+      const ancho = ctx.measureText('0').width || 8;
+      const n = Math.ceil(cv.width / ancho);
+      columnas = new Array(n).fill(0).map(() => ({
+        y: Math.random() * -60,
+        velocidad: 0.4 + Math.random() * 0.9,
+        largo: 8 + Math.floor(Math.random() * 18)
+      }));
+    }
+
+    function paso(now) {
+      if (document.hidden) { requestAnimationFrame(paso); return; }
+      if (now - ultimo < intervalo) { requestAnimationFrame(paso); return; }
+      ultimo = now;
+
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.045)';
+      ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.font = fuente + 'px monospace';
+
+      const ancho = ctx.measureText('0').width || 8;
+      columnas.forEach((col, i) => {
+        const x = i * ancho;
+        const y = col.y * fuente;
+        const glifo = glifos[Math.floor(Math.random() * glifos.length)];
+        ctx.fillStyle = '#00ff41';
+        ctx.fillText(glifo, x, y);
+        ctx.fillStyle = 'rgba(0, 255, 65, 0.5)';
+        for (let k = 1; k < col.largo; k++) {
+          const yAnt = y - k * fuente;
+          if (yAnt < 0) break;
+          ctx.fillText(glifos[Math.floor(Math.random() * glifos.length)], x, yAnt);
+        }
+        col.y += col.velocidad;
+        if (y > cv.height + col.largo * fuente) {
+          col.y = -Math.random() * 40;
+          col.velocidad = 0.4 + Math.random() * 0.9;
+          col.largo = 8 + Math.floor(Math.random() * 18);
+        }
+      });
+      requestAnimationFrame(paso);
+    }
+
+    function estatico() {
+      ctx.fillStyle = 'rgba(0, 255, 65, 0.06)';
+      ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.font = fuente + 'px monospace';
+      const ancho = ctx.measureText('0').width || 8;
+      const n = Math.ceil(cv.width / ancho);
+      for (let i = 0; i < n; i++) {
+        if (Math.random() > 0.28) continue;
+        ctx.fillStyle = 'rgba(0, 255, 65, 0.5)';
+        ctx.fillText(glifos[Math.floor(Math.random() * glifos.length)], i * ancho, Math.random() * cv.height);
+      }
+    }
+
+    dimensionar();
+    window.addEventListener('resize', dimensionar);
+    if (REDUCIDO) { estatico(); return; }
+    requestAnimationFrame(paso);
+  }
+
+  /* ---------------- 2. Nube 3D de datos reales ---------------- */
+
+  function iniciarNube() {
+    const cv = document.getElementById('nube3d');
+    if (!cv) return;
+
+    const fallback = document.createElement('div');
+    fallback.className = 'nube-fallback';
+    fallback.textContent = 'La nube 3D necesita WebGL. Los datos: 43.633 vehículos usados, 51.525 anuncios en el dataset público.';
+    cv.parentNode.insertBefore(fallback, cv);
+    cv.style.display = 'none';
+
+    if (!window.THREE || !window.VEHICULOS_NUBE) return;
+
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+    } catch (e) {
+      return;
+    }
+    if (!renderer.getContext()) return;
+
+    const escena = new THREE.Scene();
+    const camara = new THREE.PerspectiveCamera(50, 1, 0.1, 400);
+
+    // --- decodificar los datos ---
+    const bin = atob(window.VEHICULOS_NUBE);
+    const n = Math.floor(bin.length / 5);
+    const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+
+    const posiciones = new Float32Array(n * 3);
+    const colores = new Float32Array(n * 3);
+    const ESCALA_X = 22, ESCALA_Y = 16, ESCALA_Z = 10;
+    // Escala logaritmica en kilometraje y precio: la distribucion esta duramente
+    // concentrada (la mayoria de los anuncios son baratos y de poco kilometraje) y con
+    // escala lineal la nube queda aplastada contra el suelo, sin estructura visible.
+    const MAX_KM = Math.log10(1 + 990000);
+    const MAX_USD = Math.log10(1 + 375000);
+
+    for (let i = 0; i < n; i++) {
+      const o = i * 5;
+      const x = bytes[o] | (bytes[o + 1] << 8);
+      const y = bytes[o + 2] | (bytes[o + 3] << 8);
+      const z = bytes[o + 4];
+      posiciones[i * 3] = (Math.log10(1 + x * 500) / MAX_KM) * ESCALA_X - ESCALA_X / 2;
+      posiciones[i * 3 + 1] = (Math.log10(1 + y * 25) / MAX_USD) * ESCALA_Y;
+      posiciones[i * 3 + 2] = (Math.min(z, 120) / 120) * ESCALA_Z - ESCALA_Z / 2;
+      // brillo: mas dias publicado -> mas verde
+      const b = 0.18 + 0.82 * (Math.min(z, 120) / 120);
+      colores[i * 3] = 0.05 * b;
+      colores[i * 3 + 1] = b;
+      colores[i * 3 + 2] = 0.28 * b;
+    }
+
+    // Encuadre por percentiles, no por la caja completa: unos pocos anuncios con
+    // 990.000 km estiran la caja y dejarian la nube densa pegada al borde.
+    const ejeX = [], ejeY = [], ejeZ = [];
+    for (let i = 0; i < n; i++) {
+      ejeX.push(posiciones[i * 3]);
+      ejeY.push(posiciones[i * 3 + 1]);
+      ejeZ.push(posiciones[i * 3 + 2]);
+    }
+    const percentil = (arr, p) => {
+      const c = arr.slice().sort((a, b) => a - b);
+      return c[Math.min(c.length - 1, Math.max(0, Math.floor(c.length * p)))];
+    };
+    const centro = new THREE.Vector3(
+      percentil(ejeX, 0.5), percentil(ejeY, 0.5), percentil(ejeZ, 0.5));
+    const dispersion = Math.max(
+      percentil(ejeX, 0.9) - percentil(ejeX, 0.1),
+      percentil(ejeY, 0.9) - percentil(ejeY, 0.1),
+      percentil(ejeZ, 0.9) - percentil(ejeZ, 0.1));
+    const radio = dispersion * 0.5;
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(posiciones, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(colores, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 0.13,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.95,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true
+    });
+    const puntos = new THREE.Points(geo, material);
+    escena.add(puntos);
+
+    // camara y rejilla, ya con la caja real de los datos
+    const distancia = radio * 3.1;
+    camara.position.set(centro.x + distancia * 0.72, centro.y + distancia * 0.5, centro.z + distancia * 1.05);
+    camara.lookAt(centro);
+
+    const rejilla = new THREE.GridHelper(radio * 4, 24, 0x00ff41, 0x0b3a18);
+    rejilla.position.set(centro.x, percentil(ejeY, 0.05) - 0.15, centro.z);
+    escena.add(rejilla);
+
+    let controles = null;
+    if (window.THREE.OrbitControls) {
+      controles = new THREE.OrbitControls(camara, cv);
+      controles.enableDamping = true;
+      controles.dampingFactor = 0.08;
+      controles.enableZoom = false;      // la rueda sigue bajando la pagina
+      controles.enablePan = false;
+      controles.autoRotate = !REDUCIDO;
+      controles.autoRotateSpeed = 0.45;
+      controles.target.copy(centro);
+      controles.minPolarAngle = 0.4;
+      controles.maxPolarAngle = Math.PI * 0.52;
+      controles.addEventListener('start', () => { controles.autoRotate = false; });
+    }
+
+    function dimensionar() {
+      const ancho = cv.clientWidth || 1;
+      const alto = cv.clientHeight || 1;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+      renderer.setSize(ancho, alto, false);
+      camara.aspect = ancho / alto;
+      camara.updateProjectionMatrix();
+    }
+
+    // mostrar antes de medir: si no, clientWidth da 0 y el canvas queda en 1x1
+    cv.style.display = 'block';
+    fallback.remove();
+    dimensionar();
+    window.addEventListener('resize', dimensionar);
+
+    let ultimo = 0;
+    function bucle(now) {
+      requestAnimationFrame(bucle);
+      if (REDUCIDO) { renderer.render(escena, camara); return; }
+      if (now - ultimo < 1000 / 40) return;
+      ultimo = now;
+      if (controles) controles.update();   // sin esto el auto-giro y el damping no corren
+      renderer.render(escena, camara);
+    }
+    requestAnimationFrame(bucle);
+  }
+
+  /* ---------------- 3. Copiar correo + navegacion activa ---------------- */
+
+  function iniciarInteraccion() {
+    const boton = document.getElementById('copiar-email');
+    if (boton) {
+      boton.addEventListener('click', async () => {
+        const correo = 'lerius700@gmail.com';
+        const original = boton.textContent;
+        try {
+          await navigator.clipboard.writeText(correo);
+          boton.textContent = 'Correo copiado';
+        } catch (e) {
+          boton.textContent = correo;
+        }
+        setTimeout(() => { boton.textContent = original; }, 2200);
+      });
+    }
+
+    const enlaces = Array.from(document.querySelectorAll('nav a'));
+    const secciones = Array.from(document.querySelectorAll('main section'));
+    if (!enlaces.length || !secciones.length || !('IntersectionObserver' in window)) return;
+
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        enlaces.forEach((a) => a.classList.toggle('activo', a.getAttribute('href') === '#' + entrada.target.id));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secciones.forEach((s) => observador.observe(s));
+  }
+
+  function arrancar() {
+    iniciarLluvia();
+    iniciarInteraccion();
+    if (window.THREE) iniciarNube();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', arrancar);
+  } else {
+    arrancar();
+  }
+</script>
+
+</body>
+</html>
